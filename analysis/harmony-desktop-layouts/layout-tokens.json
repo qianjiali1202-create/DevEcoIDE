@@ -1,0 +1,42 @@
+{
+  "status": "鸿蒙电脑原生应用设计候选，非平台官方统一尺寸",
+  "unit_mapping": {
+    "design_layout": "1 px = 1 vp",
+    "design_type": "1 px = 1 fp"
+  },
+  "frames": {
+    "compact": "1236 × 824",
+    "base": "1440 × 960",
+    "standard_plus": "1560 × 1040",
+    "fold_expanded": "1648 × 1236",
+    "external": "1920 × 1080"
+  },
+  "device_resolution_analysis": [
+    {"device": "HUAWEI MateBook 14", "screen_inches": 14.2, "aspect_ratio": "3:2", "physical_px": "2880 × 1920", "approx_ppi": 244, "candidate_logical_px": "1440 × 960"},
+    {"device": "HUAWEI MateBook Pro", "screen_inches": 14.2, "aspect_ratio": "3:2", "physical_px": "3120 × 2080", "approx_ppi": 264, "candidate_logical_px": "1560 × 1040"},
+    {"device": "HUAWEI MateBook Fold 半屏", "screen_inches": 13, "aspect_ratio": "3:2", "physical_px": "2472 × 1648", "approx_ppi": 229, "candidate_logical_px": "1236 × 824"},
+    {"device": "HUAWEI MateBook Fold 展开", "screen_inches": 18, "aspect_ratio": "4:3", "physical_px": "3296 × 2472", "approx_ppi": 229, "candidate_logical_px": "1648 × 1236"}
+  ],
+  "resolution_mapping_note": "2×候选逻辑映射用于设计验证，不代表HarmonyOS官方默认显示缩放",
+  "regions": {
+    "application_top_region": {"optional": true, "default": 0, "when_used": 48, "range": "40–48 vp", "note": "与内容列数独立；系统窗口框架不计入"},
+    "directory": {"default": 240, "range": "200–320 vp"},
+    "main_content": {"default": "flex", "recommended_min": 640},
+    "auxiliary": {"default": 320, "range": "280–420 vp"},
+    "bottom_panel": {"default": 200, "range": "160–280 vp"},
+    "status_bar": {"default": 24}
+  },
+  "responsive": [
+    {"min_width": 1600, "mode": "目录、主内容、辅助区完整并行"},
+    {"min_width": 1280, "max_width": 1599, "mode": "目录与主内容常驻，一个辅助区按需展示"},
+    {"min_width": 960, "max_width": 1279, "mode": "目录可压缩，辅助区改为抽屉或覆盖"},
+    {"max_width": 959, "mode": "单区切换，保留主任务"}
+  ],
+  "resize_behavior": {
+    "window": {"min": "800 × 600", "max_test": "2560 × 1600", "behavior": "continuous"},
+    "directory": {"behavior": "user_resizable_then_fixed", "collapse_below": 960},
+    "main_content": {"behavior": "flex", "absorbs_window_delta": true, "min": 640},
+    "auxiliary": {"behavior": "user_resizable_then_fixed", "collapse_below": 1280, "restore_previous_width": true},
+    "bottom_panel": {"behavior": "user_resizable", "body_min_height": 480}
+  }
+}

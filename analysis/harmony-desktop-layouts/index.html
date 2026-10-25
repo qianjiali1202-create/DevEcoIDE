@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>鸿蒙电脑原生应用布局研究 · 钱佳丽</title>
+  <meta name="description" content="主流桌面软件布局模式、鸿蒙电脑窗口尺寸与可调布局实验。">
+  <link rel="stylesheet" href="../ide-typography-components/styles.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">跳到正文</a>
+  <header class="topbar">
+    <div class="brand">Harmony Layout Lab <span>原生电脑软件布局研究</span></div>
+    <div class="top-title">设计与研究 · 钱佳丽 · 2026.10.20</div>
+    <a class="button" href="../../index.html#analysis">返回研究分类</a>
+  </header>
+
+  <div class="workspace">
+    <aside class="sidebar" aria-label="章节导航">
+      <p class="side-heading">研究目录</p>
+      <nav>
+        <a href="#overview" aria-current="page"><span>01</span>选择设计尺寸</a>
+        <a href="#resolution"><span>02</span>设备尺寸与分辨率</a>
+        <a href="#patterns"><span>03</span>布局模式图谱</a>
+        <a href="#comparison"><span>04</span>市场案例对照</a>
+        <a href="#lab"><span>05</span>尺寸实验器</a>
+        <a href="#stretch"><span>06</span>拉伸适配规则</a>
+        <a href="#responsive"><span>07</span>窗口响应策略</a>
+        <a href="#guidelines"><span>08</span>设计检查清单</a>
+        <a href="#sources"><span>09</span>来源与边界</a>
+      </nav>
+      <div class="side-block">
+        <p class="side-heading">默认设计基准</p>
+        <p><strong>1440 × 960 px</strong><br>设计 px 按 1:1 映射 vp；字体映射 fp。</p>
+      </div>
+      <div class="side-bottom"><strong>HarmonyOS PC</strong><span>键鼠优先 · 兼顾触控</span></div>
+    </aside>
+
+    <main id="main">
+      <section id="overview" class="chapter">
+        <div class="page-heading">
+          <p class="eyebrow">DESIGN RESEARCH / 03</p>
+          <h1>鸿蒙电脑原生应用布局怎么选</h1>
+          <p>先确定内容区是一列、两列还是三列，再判断是否需要应用顶部区；用一个主画板建立方案，用窗口断点验证变化。</p>
+        </div>
+        <div class="metadata"><span>8 类布局模式</span><span>6 个市场产品参考</span><span>尺寸可自定义</span></div>
+
+        <div class="hero-answer">
+          <div><span class="kicker">主画板</span><strong>1440 × 960</strong><small>Figma / Pixso / Sketch 中按 px 创建</small></div>
+          <div><span class="kicker">紧凑验证</span><strong>1236 × 824</strong><small>Fold 半屏与放大显示压力测试</small></div>
+          <div><span class="kicker">展开验证</span><strong>1648 × 1236</strong><small>Fold 展开态与大窗口</small></div>
+          <div><span class="kicker">单位交付</span><strong>px → vp / fp</strong><small>布局 1px=1vp，文字 1px=1fp</small></div>
+        </div>
+
+        <div class="recommendation">
+          <div><span class="kicker">先做窗口，再做页面</span><h3>不要把 3120 × 2080 的物理分辨率当设计画板。</h3><p>原生电脑应用存在全屏、分屏、自由窗口和外接显示器。设计对象应是可变化的窗口内容区。</p></div>
+          <a class="button primary" href="#lab">打开尺寸实验器</a>
+        </div>
+
+        <h2 class="subheading">主画板的推荐骨架（示意开启顶部区）</h2>
+        <div class="base-anatomy sheet" aria-label="1440乘960布局尺寸示意，应用顶部区可选">
+          <div class="mini-window anatomy-window">
+            <div class="mini-top">可选应用顶部区 · 0 / 48</div>
+            <div class="mini-body">
+              <div class="mini-nav">目录<br><b>240</b></div>
+              <div class="mini-main">主内容<br><b>自适应，建议不小于 640</b></div>
+              <div class="mini-side">其他 / 属性 / AI<br><b>320</b></div>
+            </div>
+            <div class="mini-status">状态栏 24 · 可选</div>
+          </div>
+          <div class="base-notes">
+            <p><strong>系统窗口区</strong><span>由系统窗口框架管理，不等于应用必须再放一条顶部栏。</span></p>
+            <p><strong>应用顶部区</strong><span>可选，关闭为 0；需要全局导航或命令时建议 40–48 vp，也可改用侧栏、局部或浮动工具条。</span></p>
+            <p><strong>目录列</strong><span>默认 240 vp，可调范围 200–320；超过范围应考虑层级或内容问题。</span></p>
+            <p><strong>主内容</strong><span>获得剩余空间，是布局中唯一必须持续伸缩的区域。</span></p>
+            <p><strong>辅助列</strong><span>默认 320 vp，可调范围 280–420；窗口变窄时优先折叠。</span></p>
+          </div>
+        </div>
+      </section>
+
+      <section id="resolution" class="chapter">
+        <div class="section-intro"><span class="kicker">DEVICE RESOLUTION</span><h2>鸿蒙电脑尺寸与分辨率分析</h2><p>物理分辨率决定屏幕像素密度和资源清晰度，不能直接当作应用设计画板。以下先记录官方设备参数，再用统一的 2× 候选映射换算逻辑设计尺寸。</p></div>
+        <div class="resolution-flow sheet" aria-label="从物理分辨率到应用窗口的换算关系">
+          <div><span>设备物理像素</span><strong>2880 × 1920</strong><small>屏幕硬件规格</small></div><i>÷ 2</i><div><span>候选逻辑画板</span><strong>1440 × 960</strong><small>设计 px → 开发 vp</small></div><i>→</i><div><span>真实应用窗口</span><strong>连续变化</strong><small>全屏 / 分屏 / 自由窗口</small></div>
+        </div>
+        <div class="table-scroll">
+          <table class="research-table resolution-table">
+            <thead><tr><th>设备 / 姿态</th><th>官方屏幕参数</th><th>约算像素密度</th><th>2× 候选逻辑尺寸</th><th>设计验证角色</th></tr></thead>
+            <tbody>
+              <tr><td><strong>MateBook 14</strong><span class="evidence">14.2 英寸 · 3:2</span></td><td>2880 × 1920<a class="source-pill" href="https://consumer.huawei.com/cn/harmonyos-computer/matebook-14-harmonyos-version/" target="_blank" rel="noreferrer">[S12] 官方来源 ↗</a></td><td>约 244 ppi</td><td><strong>1440 × 960</strong></td><td>主设计画板</td></tr>
+              <tr><td><strong>MateBook Pro</strong><span class="evidence">14.2 英寸 · 3:2</span></td><td>3120 × 2080<a class="source-pill" href="https://consumer.huawei.com/cn/harmonyos-computer/matebook-pro/specs/" target="_blank" rel="noreferrer">[S02] 官方来源 ↗</a></td><td>约 264 ppi</td><td><strong>1560 × 1040</strong></td><td>更宽标准窗口</td></tr>
+              <tr><td><strong>MateBook Fold 半屏</strong><span class="evidence">13 英寸 · 3:2</span></td><td>2472 × 1648<a class="source-pill" href="https://consumer.huawei.com/cn/harmonyos-computer/matebook-fold-ultimate-design/specs/" target="_blank" rel="noreferrer">[S03] 官方来源 ↗</a></td><td>约 229 ppi</td><td><strong>1236 × 824</strong></td><td>紧凑压力测试</td></tr>
+              <tr><td><strong>MateBook Fold 展开</strong><span class="evidence">18 英寸 · 4:3</span></td><td>3296 × 2472<a class="source-pill" href="https://consumer.huawei.com/cn/harmonyos-computer/matebook-fold-ultimate-design/specs/" target="_blank" rel="noreferrer">[S03] 官方来源 ↗</a></td><td>约 229 ppi</td><td><strong>1648 × 1236</strong></td><td>大画布与并行面板</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="resolution-caveat"><strong>换算边界：</strong>“÷2”是为了建立一致设计基准的候选映射，不是对 HarmonyOS 默认显示缩放的官方描述。应用窗口还会受系统区域、窗口装饰、分屏比例和用户显示设置影响，因此交付必须继续验证可变窗口。</p>
+        <div class="resolution-findings">
+          <article><span>01</span><h3>3:2 是主基线</h3><p>三款常用姿态都是 3:2，1440×960 适合承担主画板；它代表逻辑工作区，不代表一台设备的全屏截图。</p></article>
+          <article><span>02</span><h3>4:3 用来增加并行信息</h3><p>Fold 展开态多出的高度适合日志、预览和上下文，而不是把原页面整体放大。</p></article>
+          <article><span>03</span><h3>物理像素用于资源质量</h3><p>位图与屏幕适配需要关注 229–264 ppi；布局尺寸、间距和控件仍以逻辑 vp 组织。</p></article>
+        </div>
+      </section>
+
+      <section id="patterns" class="chapter">
+        <div class="section-intro"><span class="kicker">LAYOUT ATLAS</span><h2>主流桌面软件的 8 类布局</h2><p>以下是结构归纳，用统一视觉方便比较，不是竞品界面复刻或尺寸测量。选择布局时看任务关系，不按产品名字照搬。</p></div>
+        <div id="patternGrid" class="pattern-grid"></div>
+      </section>
+
+      <section id="comparison" class="chapter">
+        <div class="section-intro"><span class="kicker">MARKET COMPARISON</span><h2>市场产品如何组合这些区域</h2><p>对照只记录官方文档能确认的区域结构和行为。列宽为本研究的鸿蒙候选值，不宣称是对应产品的实际尺寸。</p></div>
+        <div class="table-scroll">
+          <table class="research-table layout-table">
+            <thead><tr><th>产品 / 类型</th><th>可确认的布局结构</th><th>解决的任务</th><th>鸿蒙方案可借鉴</th></tr></thead>
+            <tbody id="comparisonRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="lab" class="chapter">
+        <div class="section-intro"><span class="kicker">INTERACTIVE LAB</span><h2>布局尺寸与拉伸实验器</h2><p>选择预设、输入尺寸，或直接拖动预览中的窗口右下角与面板分隔线。预览按比例缩放，标注始终显示逻辑 px；交付时布局映射为 vp、文字映射为 fp。</p></div>
+        <div class="lab-shell">
+          <form class="lab-controls sheet" id="layoutForm">
+            <div class="sheet-head"><strong>窗口与面板</strong><button class="button" type="button" id="resetLayout">恢复推荐</button></div>
+            <label>布局类型<select class="input" id="layoutType"></select></label>
+            <div class="preset-row" id="presetButtons"></div>
+            <div class="control-grid">
+              <label>窗口宽<input class="input short" id="windowWidth" type="number" min="800" max="2560" step="4"></label>
+              <label>窗口高<input class="input short" id="windowHeight" type="number" min="600" max="1600" step="4"></label>
+              <label class="toggle-row">按断点自动折叠<input id="autoAdapt" type="checkbox" checked aria-label="窗口变窄时按断点自动折叠辅助面板"></label>
+              <label class="toggle-row">应用顶部区<input id="topEnabled" type="checkbox" aria-label="显示应用级导航或命令区"></label>
+              <label>顶部区高度<input class="input short" id="topHeight" type="number" min="0" max="96" step="4"></label>
+              <label>目录列<input class="input short" id="leftWidth" type="number" min="0" max="480" step="4"></label>
+              <label>辅助列<input class="input short" id="rightWidth" type="number" min="0" max="560" step="4"></label>
+              <label>底部区<input class="input short" id="bottomHeight" type="number" min="0" max="480" step="4"></label>
+            </div>
+            <p class="caption" id="labRule"></p>
+          </form>
+          <div class="lab-preview sheet">
+            <div class="sheet-head"><strong id="previewTitle">三列工作区</strong><span id="previewSize" class="muted"></span></div>
+            <div class="stage" id="layoutStage">
+              <div class="layout-frame" id="layoutFrame">
+                <div class="lf-top"><span>应用标题</span><i>搜索</i><i>操作</i></div>
+                <div class="lf-left"><strong>目录</strong><span>一级导航</span><span class="selected">当前项目</span><span>其他项目</span></div>
+                <div class="lf-main"><strong>主内容</strong><div class="content-lines"><i></i><i></i><i></i><i></i></div></div>
+                <div class="lf-right"><strong>其他 / 属性</strong><span>上下文信息</span><span>辅助操作</span></div>
+                <div class="lf-bottom"><strong>底部区域</strong><span>日志、终端或时间线</span></div>
+                <button class="resize-handle resize-left" type="button" data-resize="left" aria-label="拖动调整目录列宽度" title="拖动调整目录列"></button>
+                <button class="resize-handle resize-right" type="button" data-resize="right" aria-label="拖动调整辅助列宽度" title="拖动调整辅助列"></button>
+                <button class="resize-handle resize-bottom" type="button" data-resize="bottom" aria-label="拖动调整底部区域高度" title="拖动调整底部区域"></button>
+                <button class="resize-window" type="button" data-resize="window" aria-label="拖动调整整个窗口尺寸" title="拖动调整窗口宽高"></button>
+              </div>
+            </div>
+            <div class="layout-result" id="layoutResult"></div>
+            <p class="resize-help" id="resizeStatus" aria-live="polite">拖动蓝色分隔线调整面板；拖动窗口右下角调整整体尺寸。</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="stretch" class="chapter">
+        <div class="section-intro"><span class="kicker">STRETCH & RESIZE</span><h2>整体窗口与三列面板如何拉伸</h2><p>窗口尺寸变化时，中间主内容负责吸收大部分增量；左右面板保持可用宽度，并在空间不足时按优先级折叠。用户主动拖动分隔线时，再保存个人宽度。</p></div>
+        <div class="stretch-demo sheet" aria-label="左中右面板拉伸关系">
+          <div class="stretch-left"><strong>左侧目录</strong><span>240 · 200–320</span><small>默认保持宽度</small></div>
+          <div class="stretch-main"><strong>中间主内容</strong><span>flex · ≥640</span><small>优先吸收窗口增量</small></div>
+          <div class="stretch-right"><strong>右侧辅助</strong><span>320 · 280–420</span><small>空间不足先折叠</small></div>
+        </div>
+        <div class="adapt-grid">
+          <article class="sheet"><div class="sheet-head"><strong>整体窗口</strong><span class="tag">可拉伸</span></div><p>宽高在自由窗口中连续变化。设计稿不要等比缩放控件，而是重新分配可用空间；实验器验证范围为 800×600 至 2560×1600。</p></article>
+          <article class="sheet"><div class="sheet-head"><strong>左侧面板</strong><span class="tag">稳定定位</span></div><p>推荐 240，常用范围 200–320。窗口变宽时不自动同比放大；低于 960 时折叠为抽屉或图标入口。</p></article>
+          <article class="sheet"><div class="sheet-head"><strong>中间主内容</strong><span class="tag">弹性区域</span></div><p>使用剩余空间，建议保持至少 640。窗口增量优先分给主内容；低于最小值时触发面板折叠，而不是继续压窄。</p></article>
+          <article class="sheet"><div class="sheet-head"><strong>右侧面板</strong><span class="tag">上下文辅助</span></div><p>推荐 320，常用范围 280–420。低于 1280 时优先折叠为抽屉；再次展开时恢复用户上次宽度。</p></article>
+        </div>
+        <div class="note"><strong>拖动约束</strong><span>拖动左右分隔线时，始终为主内容预留 640；拖动底部面板时，为主体预留 480。侧栏达到边界后停止，不继续挤压主任务。</span></div>
+      </section>
+
+      <section id="responsive" class="chapter">
+        <div class="section-intro"><span class="kicker">RESPONSIVE BEHAVIOR</span><h2>窗口变窄时，不是等比缩小</h2><p>保留主任务，改变区域的呈现方式。鸿蒙电脑官方开发入口明确要求适配全屏、分屏、自由窗口和折叠形态。</p></div>
+        <div class="responsive-flow">
+          <article><b>≥1600 vp</b><h3>完整并行</h3><p>目录、主内容和辅助列同时显示。适合 Fold 展开和大窗口。</p><div class="flow-wire three"></div></article>
+          <article><b>1280–1599 vp</b><h3>一个辅助区</h3><p>目录与主内容常驻；右侧辅助区按任务展开或收起。</p><div class="flow-wire two"></div></article>
+          <article><b>960–1279 vp</b><h3>主任务优先</h3><p>目录可压缩，辅助区转成抽屉；底部工具区按需覆盖。</p><div class="flow-wire compact"></div></article>
+          <article><b>&lt;960 vp</b><h3>单区切换</h3><p>一次只展示主内容或一个辅助区，通过返回、标签或抽屉切换。</p><div class="flow-wire single"></div></article>
+        </div>
+        <div class="note"><strong>判断顺序</strong><span>先隐藏低频辅助信息，再压缩目录，最后切换成单区导航。不要把字号、按钮和内容一起缩小。</span></div>
+      </section>
+
+      <section id="guidelines" class="chapter">
+        <div class="section-intro"><span class="kicker">DESIGN CHECKLIST</span><h2>从选择布局到交付</h2></div>
+        <div class="decision-grid">
+          <article class="sheet"><div class="sheet-head"><strong>1 · 看信息关系</strong></div><ul><li>页面之间平级且不多：可选择顶部导航。</li><li>模块超过 5 个或层级较深：左侧导航。</li><li>选择上一列决定下一列：两列或三列。</li><li>先定列关系，再独立判断是否需要应用顶部区。</li></ul></article>
+          <article class="sheet"><div class="sheet-head"><strong>2 · 定区域优先级</strong></div><ul><li>主内容必须持续可见并获得剩余空间。</li><li>目录可折叠，但要保留恢复入口与状态。</li><li>右侧辅助区通常比目录更早折叠。</li><li>面板宽度可调时要设置合理最小值。</li></ul></article>
+          <article class="sheet"><div class="sheet-head"><strong>3 · 做四档验证</strong></div><ul><li>1440×960：主设计。</li><li>1236×824：紧凑压力测试。</li><li>1648×1236：展开增值。</li><li>1920×1080：外接显示器。</li></ul></article>
+          <article class="sheet"><div class="sheet-head"><strong>4 · 交付开发</strong></div><ul><li>设计 px 作为逻辑单位。</li><li>布局、间距、圆角映射为 vp。</li><li>文字映射为 fp。</li><li>说明断点行为，而不只标一张静态稿。</li></ul></article>
+        </div>
+      </section>
+
+      <section id="sources" class="chapter">
+        <div class="section-intro"><span class="kicker">SOURCES & LIMITS</span><h2>来源与研究边界</h2><p>官方资料用于确认产品结构与平台能力；页面中的具体鸿蒙列宽、断点和尺寸是待验证设计候选。</p></div>
+        <div id="sourceList"></div>
+        <div class="downloads"><a class="button primary" href="RESEARCH.md" download>下载研究材料</a><a class="button" href="layout-tokens.json" download>下载布局参数</a></div>
+      </section>
+
+      <footer class="page-footer"><span>钱佳丽 · Harmony Desktop Layouts</span><span>研究 v1.3 / 2026.10.20</span><a href="../../index.html#analysis">返回研究分类</a></footer>
+    </main>
+  </div>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

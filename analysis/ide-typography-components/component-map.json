@@ -1,0 +1,129 @@
+{
+  "source_file": "https://www.figma.com/design/3q89XhaMGImDOPJwvfEpd7/Int-UI-Kit--Community-",
+  "retrieved": "2026-10-19",
+  "implementation": "IJ仅为展示结构与基础组件来源；鸿蒙IDE候选参数覆盖不代表IJ或鸿蒙官方规范。",
+  "components": [
+    {
+      "name": "Primary button",
+      "node": "146:52068",
+      "text": "13 / 16",
+      "visible": "28",
+      "outer": "40",
+      "radius": "4",
+      "detail": "最小标签宽 48，左右 padding 12；外层上下各 6。"
+    },
+    {
+      "name": "Secondary button",
+      "node": "146:52058",
+      "text": "13 / 16",
+      "visible": "28",
+      "outer": "40",
+      "radius": "4",
+      "detail": "描边 1；用内描边保留固定高度，避免状态切换引起位移。"
+    },
+    {
+      "name": "Input",
+      "node": "7399:46819",
+      "text": "13 / 16",
+      "visible": "28",
+      "outer": "40",
+      "radius": "4",
+      "detail": "默认宽 224；文字距左 9；Focus 节点 7399:46991，蓝色 2px 内描边。"
+    },
+    {
+      "name": "Checkbox",
+      "node": "3590:81640",
+      "text": "13 / 16",
+      "visible": "16 × 16",
+      "outer": "32",
+      "radius": "3²",
+      "detail": "图文间距 8，外层上下各 8；²3px 为 unchecked 3590:81636 边框，checked 使用原 SVG。"
+    },
+    {
+      "name": "Tabs",
+      "node": "5664:81616",
+      "text": "13 / 16",
+      "visible": "41",
+      "outer": "41",
+      "radius": "2³",
+      "detail": "Selected 顶部 12、底部 10、指示条高 3；³仅指示条圆角，不是整个页签。"
+    },
+    {
+      "name": "Table row",
+      "node": "7278:46644",
+      "text": "13 / 16",
+      "visible": "24",
+      "outer": "24",
+      "radius": "0",
+      "detail": "单行表格行高 24、左右 padding 8；本报告长文本表格为换行扩展，非原尺寸样本。"
+    },
+    {
+      "name": "Dialog",
+      "node": "7070:146270",
+      "text": "13 / 16",
+      "visible": "883 × 495",
+      "outer": "883 × 495",
+      "radius": "8",
+      "detail": "此样本尺寸，非所有弹窗固定尺寸；标题区 33、底栏 57、描边 0.5、阴影 0 8 40 / 30%。"
+    }
+  ],
+  "extra_states": [
+    {
+      "node": "146:52071",
+      "variant": "Primary Hover",
+      "background": "#3369D6"
+    },
+    {
+      "node": "7399:46991",
+      "variant": "Input Focus",
+      "border": "2px #3574F0"
+    }
+  ],
+  "assets": [
+    {
+      "file": "assets/checkbox-checked.svg",
+      "node": "3590:81640",
+      "intrinsic": "16 × 16"
+    },
+    {
+      "file": "assets/mac-controls.svg",
+      "node": "7070:146270",
+      "intrinsic": "52 × 12"
+    },
+    {
+      "file": "assets/help.svg",
+      "node": "7070:146270",
+      "intrinsic": "24 × 24"
+    },
+    {
+      "file": "assets/dialog-divider.svg",
+      "node": "7070:146270",
+      "intrinsic": "882 × 1"
+    }
+  ],
+  "fonts": {
+    "latin": "InterVariable.woff2，https://github.com/rsms/inter，SIL OFL，随附许可",
+    "cjk": "系统 PingFang SC / Microsoft YaHei / sans-serif；中文回退是适配，不冒充 Inter 中文字形",
+    "proposal": "页面优先使用系统界面字体，并内置 Inter Variable 作为可移植回退；保留原许可。"
+  },
+  "extensions": [
+    "来源页保留IJ原值；推荐页、实验及设置覆盖为鸿蒙候选。",
+    "键鼠14/20、行28、控件32/R6；阅读16/22、行32、控件36/R6；触屏16/24、行48、可见40、目标48/R8。",
+    "设置预览R12外框883×495、标题36、底栏64为方案覆盖；不是原Figma尺寸还原。",
+    "完整工作台复用Tree Lab的IJ主窗口结构及相邻assets/ij原图标，20或16固有图形不拉伸；布局为本项目组合。",
+    "文件树保留16/20，20箭头槽、20图标槽、4图文间距；每级缩进20。",
+    "原生fp/vp与CSSpx分开记录；字体缩放需真机验证。"
+  ],
+  "attribution": "Int UI Kit Community / JetBrains 组件来源保留；研究整理与方案：钱佳丽。",
+  "version": "2.0",
+  "workbench_source": {
+    "node": "7070:138481",
+    "local_manifest": "../ide-tree-lab/assets/ij/manifest.json",
+    "assets": [
+      "68f8e.svg",
+      "1f5f9.svg",
+      "c0dc4.svg",
+      "3d8af.svg"
+    ]
+  }
+}

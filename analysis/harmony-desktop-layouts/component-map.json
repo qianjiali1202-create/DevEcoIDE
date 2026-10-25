@@ -1,0 +1,20 @@
+{
+  "design_system": "Int UI Kit Community",
+  "figma_file": "https://www.figma.com/design/3q89XhaMGImDOPJwvfEpd7/Int-UI-Kit--Community-",
+  "implementation_source": "../ide-typography-components/styles.css",
+  "reused_verified_components": [
+    "button: 28px visible height, 13/16 text, R4",
+    "input and select shell: 28px height, R4",
+    "research table and selected navigation styling",
+    "sheet header, border, focus and disabled states"
+  ],
+  "project_extensions": [
+    "eight layout wireframes",
+    "responsive state cards",
+    "scaled layout preview",
+    "custom window and panel size controls"
+  ],
+  "clarification": "项目扩展用于研究表达，不标注为Int UI Kit原始组件。布局推荐值属于鸿蒙电脑方案候选。",
+  "author": "钱佳丽",
+  "version": "1.0"
+}

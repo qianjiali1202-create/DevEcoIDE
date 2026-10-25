@@ -1,0 +1,43 @@
+{
+  "context": "鸿蒙电脑，键鼠为主，兼顾触屏",
+  "status": "本研究候选方案，非鸿蒙官方IDE规范或统计最优值",
+  "default": {
+    "font_fp": 14,
+    "line_fp": 20,
+    "row_vp": 28,
+    "control_vp": 32,
+    "radius_vp": 6,
+    "action_gap_vp": 8
+  },
+  "reading": {
+    "font_fp": 16,
+    "line_fp": 22,
+    "row_vp": 32,
+    "control_vp": 36,
+    "radius_vp": 6,
+    "action_gap_vp": 8
+  },
+  "touch": {
+    "font_fp": 16,
+    "line_fp": 24,
+    "row_vp": 48,
+    "control_visible_vp": 40,
+    "target_vp": 48,
+    "radius_vp": 8,
+    "action_gap_vp": 12
+  },
+  "roles": {
+    "hint": "12/16 fp",
+    "code": "14/22 fp，可独立调节",
+    "ai_prose": "16/24 fp",
+    "file_tree": "保留项目16/20文字、28vp行、20vp图标槽与4vp图文间距；触屏选项另行放大"
+  },
+  "spacing_vp": [
+    4,
+    8,
+    12,
+    16,
+    24
+  ],
+  "popup_radius_vp": 12
+}

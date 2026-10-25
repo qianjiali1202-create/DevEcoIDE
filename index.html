@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="钱佳丽的鸿蒙电脑 IDE 体验与布局研究。">
+  <title>DevEcoIDE · 分析与研究</title>
+  <style>
+    :root{color-scheme:light;--bg:#f6f7f9;--surface:#fff;--text:#202124;--muted:#69707d;--line:#dfe2e7;--blue:#3574f0;--soft:#eaf1ff}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:"HarmonyOS Sans SC","PingFang SC",system-ui,sans-serif}
+    header{height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.92);position:sticky;top:0;z-index:2}
+    header strong{font-size:16px}header span{font-size:13px;color:var(--muted)}
+    main{max-width:1120px;margin:auto;padding:64px 32px 80px}.eyebrow{font-size:12px;letter-spacing:.12em;color:var(--blue);font-weight:700}
+    h1{font-size:44px;line-height:1.15;margin:14px 0 16px;letter-spacing:-.035em}.lead{max-width:720px;font-size:17px;line-height:1.75;color:var(--muted);margin:0 0 40px}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.card{display:flex;min-height:280px;flex-direction:column;padding:24px;border:1px solid var(--line);border-radius:12px;background:var(--surface);text-decoration:none;color:inherit;transition:.18s ease}
+    .card:hover{border-color:#9dbaf7;box-shadow:0 12px 30px rgba(33,44,67,.09);transform:translateY(-2px)}.num{font:600 12px/1.2 ui-monospace,monospace;color:var(--blue)}
+    h2{font-size:22px;line-height:1.35;margin:34px 0 12px}.card p{font-size:14px;line-height:1.65;color:var(--muted);margin:0}.meta{margin-top:auto;padding-top:24px;font-size:12px;color:var(--muted)}.open{display:inline-flex;margin-top:16px;color:var(--blue);font-weight:600;font-size:13px}
+    footer{max-width:1120px;margin:auto;padding:0 32px 32px;color:var(--muted);font-size:12px}
+    @media(max-width:820px){header{padding:0 20px}main{padding:44px 20px 64px}h1{font-size:34px}.grid{grid-template-columns:1fr}.card{min-height:220px}footer{padding:0 20px 28px}}
+  </style>
+</head>
+<body>
+  <header><strong>DevEcoIDE</strong><span>分析与研究 · 钱佳丽</span></header>
+  <main>
+    <div class="eyebrow">HARMONYOS PC / IDE RESEARCH</div>
+    <h1>从界面尺度到窗口布局</h1>
+    <p class="lead">面向键鼠为主、兼顾触屏的鸿蒙电脑 IDE，整理文件树、字体与组件尺度，以及多列工作区和分辨率适配方案。</p>
+    <section class="grid" aria-label="研究材料">
+      <a class="card" href="analysis/harmony-desktop-layouts/index.html">
+        <span class="num">RESEARCH 01</span><h2>鸿蒙电脑布局与分辨率研究</h2>
+        <p>比较物理分辨率与逻辑设计尺寸，整理八类桌面布局、三列工作区、窗口断点和左右面板拉伸策略。</p>
+        <span class="meta">布局图谱 · 分辨率 · 尺寸实验器</span><span class="open">打开研究 →</span>
+      </a>
+      <a class="card" href="analysis/ide-typography-components/index.html">
+        <span class="num">RESEARCH 02</span><h2>IDE 字号与组件尺度研究</h2>
+        <p>对比主流 IDE 的字号、行高、控件高度、圆角与间距，为鸿蒙电脑 IDE 提供可验证的密度候选方案。</p>
+        <span class="meta">竞品对照 · 密度实验 · IDE 预览</span><span class="open">打开研究 →</span>
+      </a>
+      <a class="card" href="analysis/ide-tree-lab/index.html">
+        <span class="num">RESEARCH 03</span><h2>IDE 文件树体验研究</h2>
+        <p>分析箭头、文件图标、名称间距与层级缩进，落地 20 / 20 / 16、4 px 图文间距和完整 IDE 效果。</p>
+        <span class="meta">文件树 · 间距缩进 · 交互预览</span><span class="open">打开研究 →</span>
+      </a>
+    </section>
+  </main>
+  <footer>研究整理与方案设计：钱佳丽 · 页面中的竞品与组件名称归各自权利人所有。</footer>
+</body>
+</html>
