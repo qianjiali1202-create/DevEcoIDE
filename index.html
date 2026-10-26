@@ -2,47 +2,81 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="钱佳丽的鸿蒙电脑 IDE 体验与布局研究。">
-  <title>DevEcoIDE · 分析与研究</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="钱佳丽的鸿蒙电脑 IDE 体验、界面尺度与窗口布局研究。">
+  <meta name="author" content="钱佳丽">
+  <meta name="theme-color" content="#f5f6f8">
+  <title>DevEcoIDE · 从界面尺度到窗口布局</title>
+  <link rel="icon" href="analysis/ide-tree-lab/assets/favicon.svg" type="image/svg+xml">
   <style>
-    :root{color-scheme:light;--bg:#f6f7f9;--surface:#fff;--text:#202124;--muted:#69707d;--line:#dfe2e7;--blue:#3574f0;--soft:#eaf1ff}
-    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:"HarmonyOS Sans SC","PingFang SC",system-ui,sans-serif}
-    header{height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.92);position:sticky;top:0;z-index:2}
-    header strong{font-size:16px}header span{font-size:13px;color:var(--muted)}
-    main{max-width:1120px;margin:auto;padding:64px 32px 80px}.eyebrow{font-size:12px;letter-spacing:.12em;color:var(--blue);font-weight:700}
-    h1{font-size:44px;line-height:1.15;margin:14px 0 16px;letter-spacing:-.035em}.lead{max-width:720px;font-size:17px;line-height:1.75;color:var(--muted);margin:0 0 40px}
-    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.card{display:flex;min-height:280px;flex-direction:column;padding:24px;border:1px solid var(--line);border-radius:12px;background:var(--surface);text-decoration:none;color:inherit;transition:.18s ease}
-    .card:hover{border-color:#9dbaf7;box-shadow:0 12px 30px rgba(33,44,67,.09);transform:translateY(-2px)}.num{font:600 12px/1.2 ui-monospace,monospace;color:var(--blue)}
-    h2{font-size:22px;line-height:1.35;margin:34px 0 12px}.card p{font-size:14px;line-height:1.65;color:var(--muted);margin:0}.meta{margin-top:auto;padding-top:24px;font-size:12px;color:var(--muted)}.open{display:inline-flex;margin-top:16px;color:var(--blue);font-weight:600;font-size:13px}
-    footer{max-width:1120px;margin:auto;padding:0 32px 32px;color:var(--muted);font-size:12px}
-    @media(max-width:820px){header{padding:0 20px}main{padding:44px 20px 64px}h1{font-size:34px}.grid{grid-template-columns:1fr}.card{min-height:220px}footer{padding:0 20px 28px}}
+    :root{color-scheme:light;--bg:#f5f6f8;--surface:#fff;--ink:#20242c;--muted:#727987;--line:#e2e5eb;--hover:#eceef3;--accent:#2f69dc;--accent-soft:#e9f0ff;--shadow:0 12px 36px #20335412;--radius:20px;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;font-size:14px;line-height:1.6}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}h1,h2,p{margin:0}svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}.skip{position:fixed;left:16px;top:-60px;z-index:20;background:var(--ink);color:var(--surface);padding:10px 14px;border-radius:8px}.skip:focus{top:12px}
+    .page{max-width:1540px;margin:auto;padding:0 36px}.masthead{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:30px 0 26px;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:13px;font-size:23px;font-weight:650;letter-spacing:-.5px}.brand-icon{width:42px;height:42px;background:var(--ink);color:var(--surface);display:grid;place-items:center;border-radius:12px}.brand-icon svg{width:25px;height:25px}.brand small{display:block;font-size:9px;letter-spacing:2px;font-weight:500;color:var(--muted);margin-top:1px}.mast-actions{display:flex;align-items:center;gap:18px}.mast-actions span{color:var(--muted);font-size:11px}.github-link{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:12px}.github-link:hover{color:var(--ink)}.github-link svg{width:13px;height:13px}
+    .layout{display:grid;grid-template-columns:200px minmax(0,1fr);gap:42px;margin-top:36px;min-height:calc(100vh - 220px)}.sidebar{position:sticky;top:28px;align-self:start;padding-top:3px}.nav-label{display:flex;justify-content:space-between;color:var(--muted);font-size:10px;letter-spacing:1px;font-weight:500;padding:0 12px;margin-bottom:14px}.nav-label span{font-size:9px}.nav{display:flex;flex-direction:column;gap:5px}.nav-item{display:flex;align-items:center;gap:11px;min-height:42px;padding:10px 13px;border-radius:100px;font-size:13px}.nav-item svg{width:17px;height:17px;color:var(--muted)}.nav-item span{flex:1}.nav-item small{font:10px ui-monospace,SFMono-Regular,monospace;color:var(--muted)}.nav-item:hover{background:var(--hover)}.nav-item.active{background:var(--ink);color:var(--surface)}.nav-item.active svg,.nav-item.active small{color:inherit}.sidebar-note{margin:30px 12px 24px;font-size:11px;font-weight:500}.little-dot{display:inline-block;width:6px;height:6px;background:#60a789;border-radius:50%;margin-right:6px}.sidebar-note p{color:var(--muted);font-size:11px;font-weight:400;line-height:1.9;margin-top:9px}.legend{border-top:1px solid var(--line);padding:20px 12px;display:flex;flex-direction:column;gap:10px;color:var(--muted);font-size:11px}.legend .nav-label{padding:0;margin-bottom:3px}.dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:9px}.dot.layout-dot{background:#607dde}.dot.type-dot{background:#8b70b6}.dot.tree-dot{background:#388784}.sidebar-bottom{margin:40px 12px 0;font-size:8px;letter-spacing:1.4px;color:var(--muted);line-height:2}.sidebar-bottom span{letter-spacing:0;font-size:10px}
+    main{min-width:0}.intro{display:flex;align-items:flex-end;justify-content:space-between;gap:28px;margin-bottom:30px}.eyebrow{font-size:10px;letter-spacing:1.6px;color:var(--muted);font-weight:500;margin-bottom:12px}.intro h1{font-size:36px;line-height:1.35;font-weight:650;letter-spacing:-1.2px}.intro p{max-width:720px;margin-top:12px;color:var(--muted);font-size:13px;line-height:1.9}.intro-mark{color:var(--muted);font:9px/2 ui-monospace,SFMono-Regular,monospace;letter-spacing:1.5px;text-align:right;white-space:nowrap}.explore-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:23px;margin-bottom:22px;border-top:1px solid var(--line)}.explore-bar strong{font-size:12px;font-weight:550}.explore-bar span{color:var(--muted);font-size:10px;letter-spacing:.5px}
+    .catalog{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}.research-card{display:flex;flex-direction:column;overflow:hidden;border-radius:var(--radius);background:var(--surface);transition:transform .2s,box-shadow .2s}.research-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}.research-card:first-child{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.22fr) minmax(340px,.78fr)}.research-card:first-child .card-visual{height:auto;min-height:310px}.research-card:first-child .card-body{display:flex;flex-direction:column;justify-content:center;padding:34px}.card-visual{height:238px;padding:25px 26px 0;overflow:hidden;position:relative;color:#324058}.card-visual.blue{background:linear-gradient(135deg,#709adc,#afd0f6)}.card-visual.lilac{background:linear-gradient(130deg,#b3a6d7,#d7d2ef)}.card-visual.mint{background:linear-gradient(130deg,#87b9ac,#c1ddd0)}.visual-eyebrow{font:9px ui-monospace,SFMono-Regular,monospace;letter-spacing:1.8px;margin-bottom:14px;opacity:.8}.card-body{padding:22px 26px 24px}.card-meta{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:10px;margin-bottom:8px}.card-meta b{font:500 10px ui-monospace,SFMono-Regular,monospace}.card-body h2{font-size:21px;line-height:1.5;font-weight:600;letter-spacing:-.45px}.card-body p{max-width:440px;margin-top:8px;color:var(--muted);font-size:12px;line-height:1.9}.card-bottom{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:20px}.tags{display:flex;gap:6px;flex-wrap:wrap}.tag{padding:2px 6px;border-radius:4px;background:var(--bg);color:var(--muted);font-size:9px}.card-arrow{width:28px;height:28px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center}.card-arrow svg{width:13px;height:13px}.research-card:hover .card-arrow{background:var(--ink);border-color:var(--ink);color:var(--surface)}
+    .mini-window{height:228px;margin-top:8px;border:1px solid #ffffffa8;border-radius:10px 10px 0 0;background:#f8fafc;box-shadow:0 10px 25px #25385c24;overflow:hidden;color:#414854}.mini-top{height:28px;display:flex;align-items:center;gap:4px;padding:0 10px;border-bottom:1px solid #e3e7ec;font-size:9px}.mini-top i{width:5px;height:5px;border-radius:50%;background:#cbd0d9}.mini-top span{margin-left:8px;color:#6e7785}.layout-preview{display:grid;grid-template-columns:62px 128px 1fr 110px;height:199px}.layout-preview>div{border-right:1px solid #e5e9ef;padding:12px 8px}.layout-preview>div:last-child{border:0}.rail-lines i,.panel-lines i{display:block;height:5px;margin-bottom:8px;border-radius:3px;background:#dbe2ec}.rail-lines i{width:28px;margin-left:auto;margin-right:auto}.panel-lines i:nth-child(2n){width:72%}.editor-lines{background:#fff}.editor-lines i{display:block;height:4px;margin:0 16px 9px;border-radius:2px;background:#dce4ef}.editor-lines i:nth-child(3n){width:54%;background:#b8c9e6}.type-preview{height:170px;display:flex;align-items:center;justify-content:center;gap:25px;border-radius:10px;background:#f9f8fc;box-shadow:0 8px 24px #56497c1a}.type-letter{color:#5e5181;font-size:80px;font-weight:450;line-height:1;letter-spacing:-6px}.type-side{display:flex;flex-direction:column;gap:12px;padding-left:20px;border-left:1px solid #dcd5e8;color:#6b6380}.type-side div{display:flex;align-items:baseline;gap:8px}.type-side strong{font-size:20px}.type-side small{font:9px ui-monospace,monospace;letter-spacing:1px}.tree-preview{height:178px;padding:12px 14px;border:1px solid #ffffffa8;border-radius:10px 10px 0 0;background:#f8fafc;box-shadow:0 10px 25px #25385c24;color:#414854;font-size:11px}.tree-row{display:flex;align-items:center;gap:6px;height:24px;padding:0 7px;border-radius:4px}.tree-row.depth-1{padding-left:23px}.tree-row.depth-2{padding-left:39px}.tree-row.selected{background:#e2ebfc;color:#2f64bc}.chev{width:12px;color:#7c8490}.file-icon{width:16px;height:16px;display:grid;place-items:center;color:#70839e}.file-icon svg{width:14px;height:14px}
+    .overview-foot{display:flex;align-items:center;gap:12px;margin-top:26px;padding:18px 0;color:var(--muted);font-size:11px;line-height:1.8}.overview-foot svg{width:17px;height:17px}footer{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:44px;padding:22px 0 30px;border-top:1px solid var(--line);color:var(--muted);font-size:11px}.footer-slash{margin:0 8px;color:var(--line)}footer a:hover{color:var(--ink)}
+    @media(max-width:1000px){.research-card:first-child{grid-template-columns:1fr}.research-card:first-child .card-visual{min-height:270px}.research-card:first-child .card-body{padding:26px}}
+    @media(max-width:900px){.page{padding:0 20px}.layout{grid-template-columns:1fr;margin-top:28px}.sidebar{display:none}.catalog{grid-template-columns:1fr}.research-card:first-child{grid-column:auto}.intro-mark{display:none}}
+    @media(max-width:640px){.masthead{padding:18px 0}.brand{font-size:17px}.brand-icon{width:36px;height:36px;border-radius:10px}.mast-actions span{display:none}.layout{margin-top:24px}.intro h1{font-size:29px}.intro p{font-size:12px}.research-card:first-child .card-visual{min-height:230px}.layout-preview{grid-template-columns:42px 90px 1fr}.layout-preview>div:last-child{display:none}.card-visual{height:220px;padding:22px 20px 0}.card-body,.research-card:first-child .card-body{padding:20px}.catalog{gap:18px}footer{flex-direction:column;align-items:flex-start;gap:8px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.research-card{transition:none}}
   </style>
 </head>
 <body>
-  <header><strong>DevEcoIDE</strong><span>分析与研究 · 钱佳丽</span></header>
-  <main>
-    <div class="eyebrow">HARMONYOS PC / IDE RESEARCH</div>
-    <h1>从界面尺度到窗口布局</h1>
-    <p class="lead">面向键鼠为主、兼顾触屏的鸿蒙电脑 IDE，整理文件树、字体与组件尺度，以及多列工作区和分辨率适配方案。</p>
-    <section class="grid" aria-label="研究材料">
-      <a class="card" href="analysis/harmony-desktop-layouts/index.html">
-        <span class="num">RESEARCH 01</span><h2>鸿蒙电脑布局与分辨率研究</h2>
-        <p>比较物理分辨率与逻辑设计尺寸，整理八类桌面布局、三列工作区、窗口断点和左右面板拉伸策略。</p>
-        <span class="meta">布局图谱 · 分辨率 · 尺寸实验器</span><span class="open">打开研究 →</span>
-      </a>
-      <a class="card" href="analysis/ide-typography-components/index.html">
-        <span class="num">RESEARCH 02</span><h2>IDE 字号与组件尺度研究</h2>
-        <p>对比主流 IDE 的字号、行高、控件高度、圆角与间距，为鸿蒙电脑 IDE 提供可验证的密度候选方案。</p>
-        <span class="meta">竞品对照 · 密度实验 · IDE 预览</span><span class="open">打开研究 →</span>
-      </a>
-      <a class="card" href="analysis/ide-tree-lab/index.html">
-        <span class="num">RESEARCH 03</span><h2>IDE 文件树体验研究</h2>
-        <p>分析箭头、文件图标、名称间距与层级缩进，落地 20 / 20 / 16、4 px 图文间距和完整 IDE 效果。</p>
-        <span class="meta">文件树 · 间距缩进 · 交互预览</span><span class="open">打开研究 →</span>
-      </a>
-    </section>
-  </main>
-  <footer>研究整理与方案设计：钱佳丽 · 页面中的竞品与组件名称归各自权利人所有。</footer>
+  <a class="skip" href="#analysis">跳至研究内容</a>
+  <svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="i-layout" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 4v16m9-16v16"/></symbol>
+    <symbol id="i-type" viewBox="0 0 24 24"><path d="M3 5h18M12 5v15M8 20h8M3 5v3M21 5v3"/></symbol>
+    <symbol id="i-tree" viewBox="0 0 24 24"><path d="M5 3v14a2 2 0 0 0 2 2h3M5 8h5"/><rect x="12" y="5" width="8" height="6" rx="1.5"/><rect x="12" y="16" width="8" height="6" rx="1.5"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 3h7v7m0-7L10 14M10 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 16 16"><path d="M1.5 4V3a1 1 0 0 1 1-1h3l1.5 2h6.5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1Z"/></symbol>
+    <symbol id="i-file" viewBox="0 0 16 16"><path d="M9 1.5H3a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V6.5Zm0 0v5h5"/></symbol>
+  </defs></svg>
+  <div class="page">
+    <header class="masthead">
+      <a class="brand" href="#analysis" aria-label="DevEcoIDE 研究首页"><span class="brand-icon"><svg><use href="#i-grid"/></svg></span><span>DevEcoIDE 设计研究<small>HARMONYOS PC / 研究与设计 · 钱佳丽</small></span></a>
+      <div class="mast-actions"><span>3 项可交互研究</span><a class="github-link" href="https://github.com/qianjiali1202-create/DevEcoIDE" target="_blank" rel="noopener noreferrer">GitHub <svg><use href="#i-external"/></svg></a></div>
+    </header>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="nav-label">研究目录 <span>01 — 03</span></div>
+        <nav class="nav" aria-label="研究目录">
+          <a class="nav-item active" href="#analysis"><svg><use href="#i-grid"/></svg><span>研究总览</span><small>00</small></a>
+          <a class="nav-item" href="analysis/harmony-desktop-layouts/index.html"><svg><use href="#i-layout"/></svg><span>布局与分辨率</span><small>01</small></a>
+          <a class="nav-item" href="analysis/ide-typography-components/index.html"><svg><use href="#i-type"/></svg><span>字号与组件</span><small>02</small></a>
+          <a class="nav-item" href="analysis/ide-tree-lab/index.html"><svg><use href="#i-tree"/></svg><span>文件树体验</span><small>03</small></a>
+        </nav>
+        <div class="sidebar-note"><span class="little-dot"></span>面向鸿蒙电脑的 IDE<p>键鼠操作优先，兼顾触屏。<br>从局部尺度推导完整工作区。</p></div>
+        <div class="legend"><div class="nav-label">研究范围</div><span><i class="dot layout-dot"></i>窗口与布局</span><span><i class="dot type-dot"></i>文字与组件</span><span><i class="dot tree-dot"></i>导航与层级</span></div>
+        <div class="sidebar-bottom">DESIGNED FOR CLARITY<br><span>钱佳丽 · 2026.10</span></div>
+      </aside>
+      <main id="analysis" tabindex="-1">
+        <section class="intro">
+          <div><p class="eyebrow">HARMONYOS PC / IDE RESEARCH</p><h1>从界面尺度到窗口布局</h1><p>围绕鸿蒙电脑原生 IDE，整理文件树、字体与组件尺度，以及多列工作区和分辨率适配方案。每项研究都包含证据说明、设计建议和可操作原型。</p></div>
+          <div class="intro-mark">3 RESEARCH TOPICS<br>INTERACTIVE PROTOTYPES<br>2026 / 10</div>
+        </section>
+        <div class="explore-bar"><strong>分析与研究</strong><span>选择一个主题开始阅读</span></div>
+        <section class="catalog" aria-label="研究材料">
+          <a class="research-card" href="analysis/harmony-desktop-layouts/index.html">
+            <div class="card-visual blue"><div class="visual-eyebrow">WINDOW / LAYOUT / RESPONSIVE</div><div class="mini-window"><div class="mini-top"><i></i><i></i><i></i><span>HarmonyOS PC · IDE Workspace</span></div><div class="layout-preview"><div class="rail-lines"><i></i><i></i><i></i><i></i></div><div class="panel-lines"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="editor-lines"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="panel-lines"><i></i><i></i><i></i><i></i><i></i></div></div></div></div>
+            <div class="card-body"><div class="card-meta"><span>研究 01 · 窗口系统</span><b>LAYOUT</b></div><h2>鸿蒙电脑布局与分辨率研究</h2><p>区分物理分辨率与逻辑设计尺寸，梳理桌面应用的顶部栏、单列、双列和三列布局，以及窗口缩放与左右面板拉伸策略。</p><div class="card-bottom"><div class="tags"><span class="tag">分辨率</span><span class="tag">三列布局</span><span class="tag">面板适配</span></div><span class="card-arrow"><svg><use href="#i-arrow"/></svg></span></div></div>
+          </a>
+          <a class="research-card" href="analysis/ide-typography-components/index.html">
+            <div class="card-visual lilac"><div class="visual-eyebrow">TYPE / COMPONENT / DENSITY</div><div class="type-preview"><div class="type-letter">Aa</div><div class="type-side"><div><strong>14</strong><small>UI / 20</small></div><div><strong>32</strong><small>CONTROL</small></div><div><strong>R6</strong><small>RADIUS</small></div></div></div></div>
+            <div class="card-body"><div class="card-meta"><span>研究 02 · 界面尺度</span><b>TYPE</b></div><h2>IDE 字号与组件尺度研究</h2><p>比较主流 IDE 的字号、行高、控件高度、圆角与间距，为鸿蒙电脑 IDE 建立可验证的密度候选方案。</p><div class="card-bottom"><div class="tags"><span class="tag">竞品对照</span><span class="tag">密度实验</span><span class="tag">IDE 预览</span></div><span class="card-arrow"><svg><use href="#i-arrow"/></svg></span></div></div>
+          </a>
+          <a class="research-card" href="analysis/ide-tree-lab/index.html">
+            <div class="card-visual mint"><div class="visual-eyebrow">TREE / SPACING / HIERARCHY</div><div class="tree-preview"><div class="tree-row"><span class="chev">⌄</span><span class="file-icon"><svg><use href="#i-folder"/></svg></span><span>DevEco Studio</span></div><div class="tree-row depth-1"><span class="chev">⌄</span><span class="file-icon"><svg><use href="#i-folder"/></svg></span><span>entry</span></div><div class="tree-row depth-2 selected"><span class="chev"></span><span class="file-icon"><svg><use href="#i-file"/></svg></span><span>MainAbility.ets</span></div><div class="tree-row depth-2"><span class="chev"></span><span class="file-icon"><svg><use href="#i-file"/></svg></span><span>Index.ets</span></div><div class="tree-row depth-1"><span class="chev">›</span><span class="file-icon"><svg><use href="#i-folder"/></svg></span><span>resources</span></div><div class="tree-row depth-1"><span class="chev"></span><span class="file-icon"><svg><use href="#i-file"/></svg></span><span>build-profile.json5</span></div></div></div>
+            <div class="card-body"><div class="card-meta"><span>研究 03 · 导航层级</span><b>TREE</b></div><h2>IDE 文件树体验研究</h2><p>分析箭头、文件图标、名称间距和层级缩进，验证 20 / 20 / 16、4 px 图文间距与完整 IDE 中的应用效果。</p><div class="card-bottom"><div class="tags"><span class="tag">文件树</span><span class="tag">缩进间距</span><span class="tag">交互预览</span></div><span class="card-arrow"><svg><use href="#i-arrow"/></svg></span></div></div>
+          </a>
+        </section>
+        <div class="overview-foot"><svg><use href="#i-grid"/></svg><span>三项研究共用同一套视觉结构和证据表达方式；涉及 IJ 的组件样本仍保留其原始产品特征。</span></div>
+      </main>
+    </div>
+    <footer><span>DevEcoIDE <span class="footer-slash">/</span> 从局部尺度，到完整工作区。</span><span>研究与方案设计：钱佳丽 · 非产品官方规范</span><a href="https://github.com/qianjiali1202-create/DevEcoIDE">查看仓库 ↗</a></footer>
+  </div>
 </body>
 </html>
