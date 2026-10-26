@@ -4,16 +4,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="钱佳丽的 IDE 字号、行高与组件尺度研究：官方规范、固定源码、展示组件来源与可交互的密度方案。">
+  <meta name="theme-color" content="#f5f6f8">
   <title>鸿蒙电脑 IDE 尺度研究 · 钱佳丽</title>
+  <link rel="icon" href="../ide-tree-lab/assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css?v=3">
   <link rel="stylesheet" href="workbench.css?v=3">
+  <link rel="stylesheet" href="tree-theme.css?v=1">
   <script src="workbench.js?v=3" defer></script>
   <script src="data.js?v=3" defer></script>
   <script src="app.js?v=3" defer></script>
 </head>
-<body>
+<body class="tree-style">
 <a class="skip" href="#content">跳转正文</a>
-<header class="topbar"><a class="brand" href="../../index.html#analysis">DevEco <span>/ 分析与研究</span></a><span class="top-title">IDE Typography & Components</span><a class="button" href="RESEARCH.md" download>下载研究材料</a></header>
+<header class="topbar"><a class="brand" href="#overview" aria-label="IDE 字号与组件尺度研究首页"><span class="brand-icon" aria-hidden="true">Aa</span><span>IDE 字号与组件尺度研究<small>TYPE SYSTEM / 研究与设计 · 钱佳丽</small></span></a><div class="mast-actions"><a class="button quiet" href="../../index.html#analysis">返回研究分类</a><a class="button" href="RESEARCH.md" download>下载研究材料</a><a class="github-link" href="https://github.com/qianjiali1202-create" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div></header>
 <div class="workspace"><aside class="sidebar"><div class="side-heading">研究目录</div><nav aria-label="章节"><a href="#overview" data-nav="overview"><span>01</span> 鸿蒙电脑建议</a><a href="#compare" data-nav="compare"><span>02</span> 主流 IDE 对照</a><a href="#components" data-nav="components"><span>03</span> 展示组件来源</a><a href="#lab" data-nav="lab"><span>04</span> 字号与密度实验</a><a href="#ide" data-nav="ide"><span>05</span> 鸿蒙方案预览</a><a href="#sources" data-nav="sources"><span>06</span> 来源与测量口径</a></nav><div class="side-block"><div class="side-heading">相关研究</div><a href="../ide-tree-lab/index.html">文件树 · 间距与缩进</a><p>延续 20 / 20 / 16 与<br>4 px 图文间距的讨论。</p></div><div class="side-bottom"><strong>钱佳丽</strong><span>研究整理与方案设计</span><span>2026.10.19 · v2.0</span><span class="status-dot">基于 Int UI Kit 搭建</span></div></aside>
 <main id="content" tabindex="-1">
 <div class="page-heading"><p class="eyebrow">DESIGN RESEARCH / 02</p><h1>主流 IDE 对照与鸿蒙电脑尺度建议</h1><p>从竞品差异、中文阅读和键鼠 / 触屏任务出发，推导适合鸿蒙电脑的设计参数。</p><div class="metadata"><span>6 个 IDE 对照</span><span>3 个体系有部分数值依据</span><span>官方文档 · 源码 · Figma</span></div></div>
