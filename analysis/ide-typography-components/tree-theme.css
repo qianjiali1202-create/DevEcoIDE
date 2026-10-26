@@ -1,0 +1,173 @@
+/* Research shell shared with IDE Tree Lab. Product specimens remain scoped below. */
+:root{
+  --site-bg:#f5f6f8;
+  --site-surface:#fff;
+  --site-ink:#20242c;
+  --site-muted:#727987;
+  --site-line:#e2e5eb;
+  --site-hover:#eceef3;
+  --site-accent:#2f69dc;
+  --site-accent-soft:#e9f0ff;
+  --site-shadow:0 12px 36px #20335412;
+  --site-radius:20px;
+}
+
+body.tree-style{
+  background:var(--site-bg);
+  color:var(--site-ink);
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  font-size:14px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.tree-style a{color:inherit}
+.tree-style .skip{background:var(--site-ink);color:var(--site-surface);border-radius:8px}
+
+/* Masthead */
+.tree-style .topbar{
+  position:relative;
+  top:auto;
+  z-index:10;
+  width:calc(100% - 72px);
+  max-width:1468px;
+  height:auto;
+  min-height:99px;
+  margin:0 auto;
+  padding:26px 0;
+  gap:20px;
+  background:transparent;
+  border-bottom:1px solid var(--site-line);
+}
+.tree-style .brand{display:flex;align-items:center;gap:13px;color:var(--site-ink);font-size:23px;font-weight:650;letter-spacing:-.5px}
+.tree-style .brand>span:last-child{display:block;margin:0;color:inherit;font-weight:650}
+.tree-style .brand small{display:block;margin-top:1px;color:var(--site-muted);font-size:9px;font-weight:500;letter-spacing:2px}
+.tree-style .brand-icon{width:42px;height:42px;display:grid;place-items:center;flex:none;margin:0;border-radius:12px;background:var(--site-ink);color:var(--site-surface);font-size:17px;font-weight:650;letter-spacing:-1px}
+.tree-style .mast-actions{display:flex;align-items:center;gap:10px;margin-left:auto}
+.tree-style .github-link{margin-left:8px;color:var(--site-muted);font-size:12px;white-space:nowrap}
+.tree-style .github-link:hover{color:var(--site-ink);text-decoration:none}
+
+/* Shared button language; IJ specimens are reset at the end of this file. */
+.tree-style .button{
+  min-width:0;height:38px;padding:8px 12px;gap:7px;
+  border:1px solid var(--site-line);border-radius:8px;
+  box-shadow:none;background:var(--site-surface);color:var(--site-ink);
+  font:500 12px/20px var(--font);
+}
+.tree-style .button:hover{background:var(--site-hover);text-decoration:none}
+.tree-style .button.quiet{background:transparent}
+.tree-style .button.primary{background:var(--site-ink);border-color:var(--site-ink);color:var(--site-surface)}
+.tree-style .button.primary:hover{background:#343942}
+
+/* Two-column research layout */
+.tree-style .workspace{
+  width:calc(100% - 72px);max-width:1468px;min-height:calc(100vh - 160px);
+  margin:36px auto 0;display:grid;grid-template-columns:200px minmax(0,1fr);gap:42px;
+}
+.tree-style .sidebar{
+  position:sticky;top:28px;align-self:start;height:auto;max-height:calc(100vh - 56px);overflow:auto;
+  padding:3px 0 24px;border:0;background:transparent;
+}
+.tree-style .side-heading{margin:0 0 14px;padding:0 12px;color:var(--site-muted);font-size:10px;font-weight:500;letter-spacing:1px}
+.tree-style .sidebar nav{display:flex;flex-direction:column;gap:5px}
+.tree-style .sidebar nav a{
+  height:auto;min-height:42px;margin:0;padding:10px 13px;gap:11px;
+  border-radius:100px;color:var(--site-ink);font-size:13px;transition:background .15s;
+}
+.tree-style .sidebar nav a span{width:18px;flex:none;color:var(--site-muted);font:500 10px/1 ui-monospace,SFMono-Regular,monospace}
+.tree-style .sidebar nav a:hover{background:var(--site-hover);text-decoration:none}
+.tree-style .sidebar nav a[aria-current=page]{background:var(--site-ink);color:var(--site-surface)}
+.tree-style .sidebar nav a[aria-current=page] span{color:inherit}
+.tree-style .side-block{margin:30px 12px 0;padding-top:20px;border-top:1px solid var(--site-line)}
+.tree-style .side-block .side-heading{padding:0}
+.tree-style .side-block>a{color:var(--site-ink);font-size:11px;font-weight:500}
+.tree-style .side-block p{color:var(--site-muted);font-size:11px;line-height:1.9}
+.tree-style .side-bottom{margin-top:40px;padding:0 12px;gap:2px;color:var(--site-muted);font-size:10px;line-height:1.8;letter-spacing:0}
+.tree-style .side-bottom strong{color:var(--site-ink);font-size:11px}
+.tree-style .status-dot{margin-top:12px}
+
+.tree-style main{max-width:none;margin:0;padding:0;min-width:0}
+.tree-style .eyebrow,.tree-style .kicker{color:var(--site-muted);font-size:10px;line-height:1.6;letter-spacing:1.6px}
+.tree-style .page-heading{margin-bottom:26px}
+.tree-style .page-heading h1{margin:10px 0 8px;font-size:32px;line-height:1.4;font-weight:650;letter-spacing:-.9px}
+.tree-style .page-heading>p:not(.eyebrow){max-width:720px;color:var(--site-muted);font-size:13px;line-height:1.8}
+.tree-style .metadata{gap:18px;margin:16px 0 24px;color:var(--site-muted);font-size:11px}
+
+/* Pill section switcher */
+.tree-style .tabs{height:auto;min-height:38px;gap:5px;padding:4px;border:0;border-radius:12px;background:#eceef2;overflow-x:auto}
+.tree-style .tabs button{height:32px;padding:6px 12px;border-radius:8px;color:var(--site-muted);font:500 12px/20px var(--font)}
+.tree-style .tabs button:hover{background:#ffffff9c;color:var(--site-ink)}
+.tree-style .tabs button[aria-selected=true]{padding:6px 12px;border:0;background:var(--site-ink);color:var(--site-surface)}
+.tree-style .tabs button[aria-selected=true]:after{display:none}
+.tree-style .panel{padding-top:34px}
+.tree-style .section-intro{max-width:920px;margin-bottom:28px}
+.tree-style .section-intro h2{margin:8px 0 10px;font-size:24px;line-height:1.5;font-weight:600;letter-spacing:-.4px}
+.tree-style .section-intro p{color:var(--site-muted);font-size:13px;line-height:1.85}
+
+/* Surfaces and data blocks */
+.tree-style .metric-strip{padding:0;margin:26px 0 28px;border:0;border-radius:var(--site-radius);background:var(--site-surface);overflow:hidden}
+.tree-style .metric-strip>div{min-height:132px;padding:25px 24px;justify-content:center;border-color:var(--site-line)}
+.tree-style .metric-strip b{color:var(--site-ink);font-size:32px;line-height:38px}
+.tree-style .sheet{border:1px solid var(--site-line);border-radius:14px;background:var(--site-surface);overflow:hidden}
+.tree-style .sheet-head{min-height:46px;padding:10px 16px;border-color:var(--site-line);background:#fafbfc}
+.tree-style .sheet-head h3{font-size:13px}
+.tree-style .split,.tree-style .component-gallery{gap:24px}
+.tree-style .three-col{gap:18px}
+.tree-style .three-col article{padding:18px;border:0;border-radius:14px;background:var(--site-surface)}
+.tree-style .three-col p{color:var(--site-muted);line-height:1.9}
+.tree-style .recommendation{padding:24px 26px;border:0;border-radius:14px;background:var(--site-accent-soft)}
+.tree-style .note{padding:18px 20px;border:0;border-radius:12px;background:#eef1f6;color:var(--site-muted)}
+.tree-style .note strong{color:var(--site-ink)}
+.tree-style .subheading{margin:34px 0 16px;font-size:19px;font-weight:600;letter-spacing:-.3px}
+.tree-style .table-scroll{border-color:var(--site-line);border-radius:12px;background:var(--site-surface)}
+.tree-style .research-table th{padding:13px 14px;background:#fafbfc;border-color:var(--site-line);font-size:10px;color:var(--site-muted)}
+.tree-style .research-table td{padding:15px 14px;border-color:var(--site-line)}
+.tree-style .product-detail,.tree-style .type-ladder,.tree-style .type-ladder>div{border-color:var(--site-line)}
+.tree-style .toolbar{gap:8px;margin:18px 0}
+.tree-style .toolbar .muted{margin-left:4px}
+.tree-style .downloads{gap:8px}
+.tree-style .source-item{border-color:var(--site-line)}
+.tree-style .source-item p,.tree-style .validation-list{color:var(--site-muted)}
+.tree-style .page-footer{margin-top:52px;padding:20px 0 30px;border-color:var(--site-line);color:var(--site-muted)}
+.tree-style .toast{border-radius:8px;background:var(--site-ink)}
+
+/* Labs use the same neutral canvas. */
+.tree-style .controls{background:var(--site-surface)}
+.tree-style .live-toolbar{background:#fafbfc}
+.tree-style .live-list{border-color:var(--site-line)}
+.tree-style .dialog-stage{border:0;border-radius:14px;background:#e7e9ee}
+
+/* Preserve IJ source components and Harmony proposal controls as research samples. */
+.tree-style .component-gallery .button,
+.tree-style .ij-dialog .button,
+.tree-style .live-surface .button{
+  min-width:72px;height:28px;padding:6px 12px;border:0;border-radius:4px;
+  box-shadow:inset 0 0 0 1px #c9ccd6;background:#fff;color:#000;
+  font:500 13px/16px var(--font);
+}
+.tree-style .component-gallery .button.primary,
+.tree-style .ij-dialog .button.primary,
+.tree-style .live-surface .button.primary{background:var(--blue);color:#fff;box-shadow:none}
+.tree-style .harmony-proposal .button{height:32px;border-radius:6px;font:400 14px/20px "HarmonyOS Sans SC",sans-serif}
+
+@media(max-width:900px){
+  .tree-style .topbar,.tree-style .workspace{width:calc(100% - 40px)}
+  .tree-style .workspace{grid-template-columns:1fr;margin-top:28px}
+  .tree-style .sidebar{display:none}
+  .tree-style .mast-actions{gap:6px}
+  .tree-style .github-link{display:none}
+}
+@media(max-width:640px){
+  .tree-style .topbar{min-height:82px;padding:18px 0;align-items:flex-start}
+  .tree-style .brand{font-size:17px}
+  .tree-style .brand-icon{width:36px;height:36px;border-radius:10px;font-size:14px}
+  .tree-style .mast-actions .quiet{display:none}
+  .tree-style .page-heading h1{font-size:28px}
+  .tree-style .section-intro h2{font-size:21px}
+  .tree-style .metric-strip>div{min-height:112px}
+  .tree-style .three-col article{padding:16px}
+  .tree-style .note{padding:16px}
+}
+@media print{
+  .tree-style .topbar{display:none!important}
+  .tree-style .workspace{width:100%;margin:0;display:block}
+}
